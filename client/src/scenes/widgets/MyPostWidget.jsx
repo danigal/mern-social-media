@@ -27,7 +27,7 @@ import { setPosts } from "state";
 
 const MyPostWidget = ({ picturePath }) => {
   const dispatch = useDispatch();
-  const [isImage, setIsImage] = useState(false);
+  const [isImage, setIsImage] = useState(false); 
   const [image, setImage] = useState(null);
   const [post, setPost] = useState("");
   const { palette } = useTheme();
@@ -46,7 +46,7 @@ const MyPostWidget = ({ picturePath }) => {
       formData.append("picturePath", image.name);
     }
 
-    const response = await fetch(`http://localhost:3001/posts`, {
+    const response = await fetch(`http://localhost:5001/posts`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
@@ -83,12 +83,12 @@ const MyPostWidget = ({ picturePath }) => {
           <Dropzone
             acceptedFiles=".jpg,.jpeg,.png"
             multiple={false}
-            onDrop={(acceptedFiles) => setImage(acceptedFiles[0])}
+            onDrop={(acceptedFiles) => setImage(acceptedFiles[0])} // it's an array of files but we only allow one file to be uploaded
           >
-            {({ getRootProps, getInputProps }) => (
+            {({ getRootProps, getInputProps }) => ( 
               <FlexBetween>
                 <Box
-                  {...getRootProps()}
+                  {...getRootProps()} 
                   border={`2px dashed ${palette.primary.main}`}
                   p="1rem"
                   width="100%"
@@ -155,7 +155,7 @@ const MyPostWidget = ({ picturePath }) => {
         )}
 
         <Button
-          disabled={!post}
+          disabled={!post} //
           onClick={handlePost}
           sx={{
             color: palette.background.alt,
